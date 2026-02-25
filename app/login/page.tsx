@@ -16,8 +16,8 @@ export default function Login() {
             priority
           />
         </div>
-
-        <div className="grow flex flex-col justify-center px-[120px]">
+        {/* px ile oynayarak düzeltme yapabilirsin */}
+        <div className="grow flex flex-col justify-center px-[165px]">
           {/* Illustration */}
           <div className="flex justify-center mb-[64px]">
             <Image
@@ -57,9 +57,9 @@ export default function Login() {
             </p>
           </div>
 
-          <form className="space-y-5">
+          <form>
             {/* Email Field */}
-            <div>
+            <div className="mb-5">
               <label className="block text-[14px] font-semibold text-[#1A202C] mb-2">
                 E-mail Address*
               </label>
@@ -71,7 +71,7 @@ export default function Login() {
             </div>
 
             {/* Password Field */}
-            <div>
+            <div className="mb-3">
               <label className="block text-[14px] font-semibold text-[#1A202C] mb-2">
                 Password*
               </label>
@@ -104,15 +104,29 @@ export default function Login() {
             </div>
 
             {/* Remember Me */}
-            <div className="flex items-center pt-1">
-              <input
-                type="checkbox"
-                id="remember"
-                className="w-4 h-4 text-[#00C800] border-[#E2E8F0] rounded focus:ring-[#00C800] cursor-pointer"
-              />
+            <div className="flex items-center mb-7">
+              <div className="relative flex items-center">
+                <input
+                  type="checkbox"
+                  id="remember"
+                  className="peer appearance-none w-5 h-5 border border-[#CBD5E1] rounded-sm checked:bg-[#4CAF50] checked:border-[#4CAF50] transition-all cursor-pointer"
+                />
+                <svg
+                  className="absolute w-3.5 h-3.5 pointer-events-none opacity-0 peer-checked:opacity-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
               <label
                 htmlFor="remember"
-                className="ml-2 text-[14px] text-[#718096] cursor-pointer select-none"
+                className="ml-2 text-[14px] text-[#1E293B] select-none"
               >
                 Remember me?
               </label>
@@ -121,7 +135,7 @@ export default function Login() {
             {/* Login Button */}
             <button
               type="button"
-              className="w-full bg-[#00B500] hover:bg-[#008c01] text-white font-semibold py-3.5 rounded-lg transition-colors mt-4"
+              className="w-full bg-[#00B500] hover:bg-[#008c01] text-white text-[14px] font-medium py-2.5 rounded-lg transition-colors"
             >
               Login
             </button>
