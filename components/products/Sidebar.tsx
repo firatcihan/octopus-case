@@ -14,26 +14,35 @@ export function Sidebar() {
 
   return (
     <aside className="w-70 shrink-0 flex flex-col gap-8">
-      <div className="relative">
-        <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+      <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg px-4 focus-within:ring-2 focus-within:ring-[#00C800] focus-within:border-transparent transition-all">
+        <div className="flex items-center pointer-events-none">
           <svg
             width="20"
             height="20"
-            viewBox="0 0 24 24"
+            viewBox="0 0 20 20"
             fill="none"
-            stroke="#A0AEC0"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <path
+              d="M9.58334 17.5C13.9556 17.5 17.5 13.9555 17.5 9.58329C17.5 5.21104 13.9556 1.66663 9.58334 1.66663C5.21108 1.66663 1.66667 5.21104 1.66667 9.58329C1.66667 13.9555 5.21108 17.5 9.58334 17.5Z"
+              stroke="#94A3B8"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M18.3333 18.3333L16.6667 16.6666"
+              stroke="#94A3B8"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </div>
         <Input
           type="text"
           placeholder="Quick search"
-          className="pl-12 bg-white border-[#E2E8F0] rounded-lg"
+          className="border-none bg-transparent focus:ring-0 pl-2 pr-3 py-3 w-full"
         />
       </div>
 

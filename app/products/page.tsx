@@ -16,7 +16,7 @@ const mockProducts: Product[] = Array.from({ length: 9 }).map((_, i) => ({
 
 export default function ProductsPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col">
       <Header />
 
       <main className="flex-1 max-w-360 w-full mx-auto px-8 py-8 flex gap-12">
