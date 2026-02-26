@@ -11,7 +11,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "bg-[#00B500] hover:bg-[#008c01] text-white text-[14px] font-medium py-2.5 rounded-lg transition-colors",
+          "bg-[#00B500] hover:bg-[#008c01] text-white text-[14px] font-medium py-2.5 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
           fullWidth && "w-full",
           className,
         )}
