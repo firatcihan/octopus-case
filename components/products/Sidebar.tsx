@@ -13,7 +13,7 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-70 shrink-0 flex flex-col gap-8">
+    <aside className="w-[256px] shrink-0 flex flex-col gap-4">
       <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg px-4 focus-within:ring-2 focus-within:ring-[#00C800] focus-within:border-transparent transition-all">
         <div className="flex items-center pointer-events-none">
           <svg
@@ -42,34 +42,31 @@ export function Sidebar() {
         <Input
           type="text"
           placeholder="Quick search"
-          className="border-none bg-transparent focus:ring-0 pl-2 pr-3 py-3 w-full"
+          className="border-none bg-transparent focus:ring-0 pl-2 pr-3 py-2.5 w-full"
         />
       </div>
 
       <div className="flex flex-col gap-4">
-        <h2 className="text-[18px] font-bold text-[#1E293B] pb-2 border-b-2 border-[#1E293B]">
+        <div className="text-[18px] font-bold text-[#1E293B] pb-2 border-b-5 border-black">
           Kategoriler
-        </h2>
+        </div>
 
-        <div className="flex flex-col gap-3 mt-2">
+        <div className="flex flex-col gap-4 mt-2">
           {categories.map((category, index) => (
-            <label
-              key={index}
-              className="flex items-center gap-3 cursor-pointer group"
-            >
-              <Checkbox id={`category-${index}`} />
-              <span className="text-[15px] text-[#475569] group-hover:text-[#1E293B] transition-colors">
+            <div key={index} className="flex items-center gap-2.5 group">
+              <Checkbox
+                className="border-black rounded-none"
+                id={`category-${index}`}
+              />
+              <span className="text-sm text-black transition-colors">
                 {category}
               </span>
-            </label>
+            </div>
           ))}
         </div>
       </div>
 
-      <Button
-        fullWidth
-        className="bg-[#1E293B] hover:bg-[#0F172A] text-white mt-4"
-      >
+      <Button fullWidth className="bg-[#1E293B] font-medium hover:bg-[#0F172A] text-white">
         Filtrele
       </Button>
     </aside>
