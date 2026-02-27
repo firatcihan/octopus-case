@@ -35,32 +35,34 @@ export function ProductOptions() {
   const [selectedFeature, setSelectedFeature] = useState("f1");
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-14">
       {/* Color Selection */}
       <div>
-        <h3 className="text-sm font-bold text-gray-900 mb-3">Renk Seç:</h3>
+        <h3 className="text-base font-bold text-black mb-3">Renk Seç:</h3>
         <div className="flex gap-4">
           {COLORS.map((color) => (
             <button
               key={color.id}
               onClick={() => setSelectedColor(color.id)}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg border transition-all ${
+              className={`flex items-center w-[145px] h-[45px] rounded-none border transition-all ${
                 selectedColor === color.id
-                  ? "border-[#5cb85c] bg-white"
+                  ? "border-transparent bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
                   : "border-gray-200 bg-white hover:bg-gray-50"
               }`}
             >
-              <span
-                className="w-4 h-4 rounded-full"
-                style={{ backgroundColor: color.hex }}
-              />
-              <span
-                className={`text-sm font-medium ${selectedColor === color.id ? "text-gray-900" : "text-gray-400"}`}
-              >
-                {color.name}
-              </span>
+              <div className="flex gap-2.5 py-3 px-5">
+                <div
+                  className="w-4 h-4 rounded-full"
+                  style={{ backgroundColor: color.hex }}
+                />
+                <span
+                  className={`text-sm font-medium ${selectedColor === color.id ? "text-gray-900" : "text-gray-400"}`}
+                >
+                  {color.name}
+                </span>
+              </div>
               {selectedColor === color.id && (
-                <div className="w-4 h-4 rounded-full bg-[#5cb85c] flex items-center justify-center ml-2">
+                <div className="w-5 h-5 rounded-full bg-[#5cb85c] flex items-center justify-center">
                   <svg
                     width="10"
                     height="8"
@@ -85,7 +87,7 @@ export function ProductOptions() {
 
       {/* Feature Selection */}
       <div>
-        <h3 className="text-sm font-bold text-gray-900 mb-3">Özellik Seç:</h3>
+        <h3 className="text-base font-bold text-black mb-3">Özellik Seç:</h3>
         <div className="grid grid-cols-2 gap-4 w-fit">
           {FEATURES.map((feature) => (
             <button
@@ -99,7 +101,7 @@ export function ProductOptions() {
             >
               <div className="flex items-center justify-between w-full mb-1">
                 <span
-                  className={`text-sm font-bold ${selectedFeature === feature.id ? "text-gray-900" : "text-gray-400"}`}
+                  className={`text-sm font-medium ${selectedFeature === feature.id ? "text-black" : "text-[#8D8D8D]"}`}
                 >
                   {feature.title}
                 </span>
@@ -124,7 +126,7 @@ export function ProductOptions() {
                 )}
               </div>
               <span
-                className={`text-xs leading-relaxed ${selectedFeature === feature.id ? "text-gray-900" : "text-gray-400"}`}
+                className={`text-sm font-medium leading-relaxed ${selectedFeature === feature.id ? "text-[#1E1E21]" : "text-[#C0C0C0]"}`}
               >
                 {feature.description}
               </span>

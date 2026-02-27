@@ -33,19 +33,19 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <Header />
 
       <main className="flex-1 max-w-360 w-full mx-auto px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-12">
+        <div className="flex flex-col lg:flex-row gap-10.5">
           {/* Left Side - Image Gallery */}
           <div className="w-full lg:w-1/2">
             <ProductGallery images={product.images} title={product.title} />
           </div>
 
           {/* Right Side - Product Details */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-2.5">
+          <div className="w-full lg:w-1/2 flex flex-col gap-14">
             <div>
               <h1 className="text-[40px] font-bold text-black mb-4 leading-tight">
                 {product.title}
               </h1>
-              <p className="text-gray-500 text-lg leading-relaxed">
+              <p className="text-[#888888] font-normal text-xl leading-relaxed">
                 {product.description}
               </p>
             </div>

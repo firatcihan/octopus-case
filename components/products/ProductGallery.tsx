@@ -32,7 +32,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
             <button
               key={index}
               onClick={() => setSelectedImage(image)}
-              className={`relative w-24 h-24 flex-shrink-0 bg-white rounded-lg overflow-hidden border-2 transition-colors ${
+              className={`relative w-24 h-24 flex-shrink-0 bg-white overflow-hidden border transition-colors ${
                 selectedImage === image
                   ? "border-black"
                   : "border-gray-200 hover:border-gray-300"

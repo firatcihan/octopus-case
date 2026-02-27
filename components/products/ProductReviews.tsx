@@ -22,7 +22,7 @@ function StarRating({ rating }: { rating: number }) {
         <svg
           key={star}
           className={`w-3.5 h-3.5 ${
-            star <= rating ? "text-[#ffc107]" : "text-gray-200"
+            star <= rating ? "text-[#FFC700]" : "text-[#FFC700]/25"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -52,10 +52,10 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
   }
 
   return (
-    <div className="mt-8">
-      <h3 className="text-lg font-bold text-gray-900 mb-6">Ürün Yorumları</h3>
+    <div>
+      <h3 className="text-base font-bold text-black mb-4">Ürün Yorumları</h3>
 
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6 mb-4">
         {reviews.slice(0, 2).map((review, index) => {
           const isExpanded = expandedReviews[index];
           const isLong = review.comment.length > 150;
@@ -63,13 +63,13 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
           return (
             <div key={index} className="flex flex-col gap-2">
               <div className="flex items-center gap-4">
-                <span className="font-bold text-gray-900">
+                <span className="font-medium text-lg text-black">
                   {review.reviewerName}
                 </span>
                 <StarRating rating={review.rating} />
               </div>
 
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-black font-normal text-lg leading-relaxed">
                 {isExpanded || !isLong
                   ? review.comment
                   : `${review.comment.substring(0, 150)}... `}
@@ -88,7 +88,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
       </div>
 
       {reviews.length > 2 && (
-        <div className="mt-6">
+        <div>
           <Button className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6 py-2.5 h-auto rounded-lg">
             Tümünü Gör
           </Button>
