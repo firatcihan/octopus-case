@@ -1,40 +1,51 @@
-import React from "react";
-import { Header } from "../../components/layout/Header";
-import { Sidebar } from "../../components/products/Sidebar";
-import { ProductCard, Product } from "../../components/products/ProductCard";
-import { Pagination } from "../../components/ui/Pagination";
+import { Header } from "@/components/layout/Header";
+import { Sidebar } from "@/components/products/Sidebar";
+import { ProductList } from "@/components/products/ProductList";
+import { ProductsProvider } from "@/store/productsContext";
+import { getProductsApi, getCategoriesApi } from "@/lib/api/products";
+import { PRODUCTS_PER_PAGE } from "@/lib/constants/app";
 
-const mockProducts: Product[] = Array.from({ length: 9 }).map((_, i) => ({
-  id: `product-${i}`,
-  title: "Godin Session HT RN Elektro...",
-  category: "Elektronik Gitar",
-  price: "$1.703",
-  rating: 4,
-  imageUrl:
-    "https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?q=80&w=1000&auto=format&fit=crop",
-}));
+interface ProductsPageProps {
+  searchParams: Promise<{
+    q?: string;
+    category?: string;
+    page?: string;
+  }>;
+}
 
-export default function ProductsPage() {
+export default async function ProductsPage({
+  searchParams,
+}: ProductsPageProps) {
+  const params = await searchParams;
+
+  const search = params.q ?? "";
+  const category = params.category ?? "";
+  const page = Math.max(1, Number(params.page) || 1);
+
+  const [productsData, categories] = await Promise.all([
+    getProductsApi(search, category, page),
+    getCategoriesApi(),
+  ]);
+
   return (
     <div className="min-h-screen bg-[#f8fafc] flex flex-col">
       <Header />
 
       <main className="flex-1 max-w-360 w-full mx-auto px-8 py-8 flex gap-12">
-        <Sidebar />
-
-        <div className="flex-1 flex flex-col gap-4">
-          <div className="text-xl font-bold text-[#141A24]">
-            56 ürün listeleniyor
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-            {mockProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <Pagination />
-        </div>
+        <ProductsProvider
+          categories={categories}
+          currentSearch={search}
+          currentCategory={category}
+          currentPage={page}
+        >
+          <Sidebar />
+          <ProductList
+            products={productsData.products}
+            total={productsData.total}
+            currentPage={page}
+            totalPages={Math.ceil(productsData.total / PRODUCTS_PER_PAGE)}
+          />
+        </ProductsProvider>
       </main>
     </div>
   );

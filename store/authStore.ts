@@ -2,8 +2,8 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { User, AuthTokens } from "@/lib/types";
-import { loginApi, refreshTokenApi } from "@/lib/api";
+import type { User, AuthTokens } from "@/lib/types/auth.types";
+import { loginApi, refreshTokenApi } from "@/lib/api/auth";
 
 interface AuthState {
   user: User | null;
@@ -19,11 +19,16 @@ interface AuthActions {
   clearError: () => void;
 }
 
-function setAuthCookie() {
-  document.cookie = `auth-token=true; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+function setAuthCookies(accessToken: string, refreshToken: string) {
+  const maxAge = 60 * 60 * 24 * 7; // 7 days
+  document.cookie = `accessToken=${accessToken}; path=/; max-age=${maxAge}; SameSite=Lax`;
+  document.cookie = `refreshToken=${refreshToken}; path=/; max-age=${maxAge}; SameSite=Lax`;
+  document.cookie = `auth-token=true; path=/; max-age=${maxAge}; SameSite=Lax`;
 }
 
-function clearAuthCookie() {
+function clearAuthCookies() {
+  document.cookie = "accessToken=; path=/; max-age=0";
+  document.cookie = "refreshToken=; path=/; max-age=0";
   document.cookie = "auth-token=; path=/; max-age=0";
 }
 
@@ -48,7 +53,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
             error: null,
           });
 
-          setAuthCookie();
+          setAuthCookies(accessToken, refreshToken);
         } catch (err) {
           const message = err instanceof Error ? err.message : "Login failed";
           set({ isLoading: false, error: message });
@@ -58,7 +63,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
 
       logout: () => {
         set({ user: null, tokens: null, error: null });
-        clearAuthCookie();
+        clearAuthCookies();
       },
 
       refreshAuth: async () => {
@@ -80,7 +85,7 @@ export const useAuthStore = create<AuthState & AuthActions>()(
             },
           });
 
-          setAuthCookie();
+          setAuthCookies(newTokens.accessToken, newTokens.refreshToken);
           return true;
         } catch {
           get().logout();
@@ -99,8 +104,8 @@ export const useAuthStore = create<AuthState & AuthActions>()(
       }),
       onRehydrateStorage: () => {
         return (state) => {
-          if (state?.tokens) {
-            setAuthCookie();
+          if (state?.tokens?.accessToken && state?.tokens?.refreshToken) {
+            setAuthCookies(state.tokens.accessToken, state.tokens.refreshToken);
           }
         };
       },

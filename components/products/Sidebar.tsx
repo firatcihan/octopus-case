@@ -1,16 +1,49 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useCallback } from "react";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { CategoryCheckbox } from "./CategoryCheckbox";
+import { useProducts } from "@/store/productsContext";
 
 export function Sidebar() {
-  const categories = [
-    "Kategori 1",
-    "Kategori 2",
-    "Kategori 3",
-    "Kategori 4",
-    "Kategori 5",
-  ];
+  const {
+    categories,
+    currentCategory,
+    currentSearch,
+    setSearchQuery,
+    setSelectedCategory,
+    clearFilters,
+  } = useProducts();
+
+  const [localSearch, setLocalSearch] = useState(currentSearch);
+
+  // URL'den gelen arama değeri değiştiğinde local state'i güncelle
+  useEffect(() => {
+    setLocalSearch(currentSearch);
+  }, [currentSearch]);
+
+  // Debounced search — URL'ye push
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (localSearch !== currentSearch) {
+        setSearchQuery(localSearch);
+      }
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [localSearch, currentSearch, setSearchQuery]);
+
+  const handleCategoryChange = useCallback(
+    (slug: string) => {
+      setSelectedCategory(currentCategory === slug ? "" : slug);
+    },
+    [currentCategory, setSelectedCategory],
+  );
+
+  const handleClearFilters = useCallback(() => {
+    setLocalSearch("");
+    clearFilters();
+  }, [clearFilters]);
 
   return (
     <aside className="w-[256px] shrink-0 flex flex-col gap-4">
@@ -41,7 +74,9 @@ export function Sidebar() {
         </div>
         <Input
           type="text"
-          placeholder="Quick search"
+          placeholder="Ürün ara..."
+          value={localSearch}
+          onChange={(e) => setLocalSearch(e.target.value)}
           className="border-none bg-transparent focus:ring-0 pl-2 pr-3 py-2.5 w-full"
         />
       </div>
@@ -51,12 +86,14 @@ export function Sidebar() {
           Kategoriler
         </div>
 
-        <div className="flex flex-col gap-4 mt-2">
-          {categories.map((category, index) => (
+        <div className="flex flex-col gap-4 mt-2 max-h-100 overflow-y-auto pr-1">
+          {categories.map((category) => (
             <CategoryCheckbox
-              key={index}
-              id={`category-${index}`}
-              label={category}
+              key={category.slug}
+              id={`category-${category.slug}`}
+              label={category.name}
+              checked={currentCategory === category.slug}
+              onChange={() => handleCategoryChange(category.slug)}
             />
           ))}
         </div>
@@ -65,8 +102,9 @@ export function Sidebar() {
       <Button
         fullWidth
         className="bg-[#1E293B] font-medium hover:bg-[#0F172A] text-white"
+        onClick={handleClearFilters}
       >
-        Filtrele
+        Filtreleri Temizle
       </Button>
     </aside>
   );
