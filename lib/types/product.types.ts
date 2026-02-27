@@ -11,6 +11,13 @@ export interface Product {
   images: string[];
   brand?: string;
   tags: string[];
+  reviews?: {
+    rating: number;
+    comment: string;
+    date: string;
+    reviewerName: string;
+    reviewerEmail: string;
+  }[];
 }
 
 export interface Category {

@@ -1,9 +1,17 @@
 import { request } from "./client";
 import { buildQueryParams } from "@/lib/utils";
 import { API_ENDPOINTS } from "@/lib/constants/endpoints";
-import { PRODUCTS_CACHE, CATEGORIES_CACHE } from "@/lib/constants/cache";
+import {
+  PRODUCTS_CACHE,
+  CATEGORIES_CACHE,
+  PRODUCT_CACHE,
+} from "@/lib/constants/cache";
 import { PRODUCTS_PER_PAGE } from "@/lib/constants/app";
-import type { ProductsResponse, Category } from "@/lib/types/product.types";
+import type {
+  ProductsResponse,
+  Category,
+  Product,
+} from "@/lib/types/product.types";
 
 type ProductQueryParams = {
   q?: string;
@@ -42,5 +50,12 @@ export async function getCategoriesApi(): Promise<Category[]> {
   return request<Category[]>(
     API_ENDPOINTS.PRODUCTS.CATEGORIES,
     CATEGORIES_CACHE,
+  );
+}
+
+export async function getSingleProductApi(id: string): Promise<Product> {
+  return request<Product>(
+    `${API_ENDPOINTS.PRODUCTS.BASE}/${id}`,
+    PRODUCT_CACHE,
   );
 }
