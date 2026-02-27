@@ -76,7 +76,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
                 {isLong && (
                   <button
                     onClick={() => toggleExpand(index)}
-                    className="text-[#00d632] font-bold hover:underline ml-1"
+                    className="text-[#00B500] text-[18px] font-medium ml-1"
                   >
                     {isExpanded ? "Daha az göster" : "Daha fazla göster"}
                   </button>
