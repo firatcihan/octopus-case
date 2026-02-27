@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/products/Sidebar";
 import { ProductList } from "@/components/products/ProductList";
@@ -11,6 +12,33 @@ interface ProductsPageProps {
     category?: string;
     page?: string;
   }>;
+}
+
+export async function generateMetadata({
+  searchParams,
+}: ProductsPageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const search = params.q;
+  const category = params.category;
+  const page = params.page ? Number(params.page) : undefined;
+
+  let title = "Ürünler";
+  const parts: string[] = [];
+
+  if (search) parts.push(`"${search}" araması`);
+  if (category) parts.push(category);
+  if (page && page > 1) parts.push(`Sayfa ${page}`);
+
+  if (parts.length > 0) title = `${title} — ${parts.join(", ")}`;
+
+  return {
+    title,
+    description: search
+      ? `"${search}" için ürün arama sonuçları.`
+      : category
+        ? `${category} kategorisindeki ürünleri keşfedin.`
+        : "Tüm ürünleri keşfedin. Kategoriye göre filtreleyin veya arama yapın.",
+  };
 }
 
 export default async function ProductsPage({
