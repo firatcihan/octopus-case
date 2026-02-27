@@ -89,7 +89,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
 
       {reviews.length > 2 && (
         <div>
-          <Button className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6 py-2.5 h-auto rounded-lg">
+          <Button className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6.5 py-3 h-auto rounded-lg">
             Tümünü Gör
           </Button>
         </div>
