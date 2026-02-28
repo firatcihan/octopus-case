@@ -39,6 +39,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
   const [expandedReviews, setExpandedReviews] = useState<
     Record<number, boolean>
   >({});
+  const [showAll, setShowAll] = useState(false);
 
   const toggleExpand = (index: number) => {
     setExpandedReviews((prev) => ({
@@ -56,7 +57,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
       <h3 className="text-base font-bold text-black mb-4">Ürün Yorumları</h3>
 
       <div className="flex flex-col gap-6 mb-4">
-        {reviews.slice(0, 2).map((review, index) => {
+        {(showAll ? reviews : reviews.slice(0, 2)).map((review, index) => {
           const isExpanded = expandedReviews[index];
           const isLong = review.comment.length > 150;
 
@@ -89,8 +90,11 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
 
       {reviews.length > 2 && (
         <div>
-          <Button className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6.5 py-3 h-auto rounded-lg">
-            Tümünü Gör
+          <Button
+            onClick={() => setShowAll((prev) => !prev)}
+            className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6.5 py-3 h-auto rounded-lg"
+          >
+            {showAll ? "Daha Az Göster" : "Tümünü Gör"}
           </Button>
         </div>
       )}

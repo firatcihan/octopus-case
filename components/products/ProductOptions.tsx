@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const COLORS = [
   { id: "silver", name: "Silver", hex: "#d1d5db" },
@@ -15,24 +15,34 @@ const FEATURES = [
   },
   {
     id: "f2",
-    title: "Ürün Özellik 1",
+    title: "Ürün Özellik 2",
     description: "Lorem Ipsum Dolar Sit Amet",
   },
   {
     id: "f3",
-    title: "Ürün Özellik 1",
+    title: "Ürün Özellik 3",
     description: "Lorem Ipsum Dolar Sit Amet",
   },
   {
     id: "f4",
-    title: "Ürün Özellik 1",
+    title: "Ürün Özellik 4",
     description: "Lorem Ipsum Dolar Sit Amet",
   },
 ];
 
 export function ProductOptions() {
-  const [selectedColor, setSelectedColor] = useState("black");
-  const [selectedFeature, setSelectedFeature] = useState("f1");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const selectedColor = searchParams.get("color") ?? COLORS[0].id;
+  const selectedFeature = searchParams.get("feature") ?? FEATURES[0].id;
+
+  function updateParam(key: string, value: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(key, value);
+    router.replace(`${pathname}?${params.toString()}`);
+  }
 
   return (
     <div className="flex flex-col gap-14">
@@ -43,7 +53,7 @@ export function ProductOptions() {
           {COLORS.map((color) => (
             <button
               key={color.id}
-              onClick={() => setSelectedColor(color.id)}
+              onClick={() => updateParam("color", color.id)}
               className={`flex items-center w-[145px] h-[45px] rounded-none border transition-all ${
                 selectedColor === color.id
                   ? "border-transparent bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
@@ -92,7 +102,7 @@ export function ProductOptions() {
           {FEATURES.map((feature) => (
             <button
               key={feature.id}
-              onClick={() => setSelectedFeature(feature.id)}
+              onClick={() => updateParam("feature", feature.id)}
               className={`flex flex-col items-start p-4 w-[189px] h-[100px] rounded-none border text-left transition-all ${
                 selectedFeature === feature.id
                   ? "border-transparent bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
