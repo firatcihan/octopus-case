@@ -9,7 +9,7 @@ function HeaderSearchInner() {
   const searchParams = useSearchParams();
 
   const q = searchParams.get("q") || "";
-  const [isOpen, setIsOpen] = useState(!!q);
+  const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState(q);
   const [lastQ, setLastQ] = useState(q);
 
@@ -18,7 +18,6 @@ function HeaderSearchInner() {
   if (q !== lastQ) {
     setQuery(q);
     setLastQ(q);
-    if (q) setIsOpen(true);
   }
 
   useEffect(() => {
