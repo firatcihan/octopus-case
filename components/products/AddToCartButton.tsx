@@ -21,39 +21,31 @@ export function AddToCartButton({
 }: AddToCartButtonProps) {
   const addItem = useCartStore((state) => state.addItem);
   const tokens = useAuthStore((state) => state.tokens);
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   async function handleClick() {
-    if (status !== "idle") return;
+    if (loading) return;
 
     if (!tokens) {
       router.push(`/login?redirect=/products/${product.id}`);
       return;
     }
 
-    setStatus("loading");
+    setLoading(true);
     await addItem(product);
-    setStatus("success");
+    setLoading(false);
     toast.success(`"${product.title}" sepete eklendi!`);
-    setTimeout(() => setStatus("idle"), 2000);
   }
-
-  const label =
-    status === "loading"
-      ? "Ekleniyor..."
-      : status === "success"
-        ? "Eklendi!"
-        : "Sepete Ekle";
 
   return (
     <Button
       fullWidth={fullWidth}
       className={className}
       onClick={handleClick}
-      disabled={status === "loading"}
+      disabled={loading}
     >
-      {label}
+      {loading ? "Ekleniyor..." : "Sepete Ekle"}
     </Button>
   );
 }
