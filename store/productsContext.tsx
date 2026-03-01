@@ -1,6 +1,6 @@
 "use client";
 
-import React, {
+import {
   createContext,
   useContext,
   useCallback,
@@ -14,10 +14,10 @@ import type { Category } from "@/lib/types/product.types";
 interface ProductsContextValue {
   categories: Category[];
   currentSearch: string;
-  currentCategory: string;
+  currentCategories: string[];
   currentPage: number;
   setSearchQuery: (query: string) => void;
-  setSelectedCategory: (category: string) => void;
+  toggleCategory: (slug: string) => void;
   setPage: (page: number) => void;
   clearFilters: () => void;
 }
@@ -28,7 +28,7 @@ interface ProductsProviderProps {
   children: ReactNode;
   categories: Category[];
   currentSearch: string;
-  currentCategory: string;
+  currentCategories: string[];
   currentPage: number;
 }
 
@@ -36,7 +36,7 @@ export function ProductsProvider({
   children,
   categories,
   currentSearch,
-  currentCategory,
+  currentCategories,
   currentPage,
 }: ProductsProviderProps) {
   const router = useRouter();
@@ -61,16 +61,19 @@ export function ProductsProvider({
 
   const setSearchQuery = useCallback(
     (query: string) => {
-      pushParams({ q: query, category: "", page: "" });
+      pushParams({ q: query, page: "" });
     },
     [pushParams],
   );
 
-  const setSelectedCategory = useCallback(
-    (category: string) => {
-      pushParams({ category, q: "", page: "" });
+  const toggleCategory = useCallback(
+    (slug: string) => {
+      const next = currentCategories.includes(slug)
+        ? currentCategories.filter((c) => c !== slug)
+        : [...currentCategories, slug];
+      pushParams({ categories: next.join(","), page: "" });
     },
-    [pushParams],
+    [currentCategories, pushParams],
   );
 
   const setPage = useCallback(
@@ -87,10 +90,10 @@ export function ProductsProvider({
   const value: ProductsContextValue = {
     categories,
     currentSearch,
-    currentCategory,
+    currentCategories,
     currentPage,
     setSearchQuery,
-    setSelectedCategory,
+    toggleCategory,
     setPage,
     clearFilters,
   };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../../store/authStore";
 
@@ -77,19 +78,13 @@ export function UserProfile() {
         <span className="text-base leading-[26px] font-normal text-gray-700">
           {fullName}
         </span>
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <Image
+          src="/assets/icons/chevron-down.svg"
+          alt=""
+          width={20}
+          height={20}
           className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-        >
-          <path
-            d="M9.99965 13.9999C9.41632 13.9999 8.83298 13.7749 8.39132 13.3332L2.95798 7.89991C2.71632 7.65824 2.71632 7.25824 2.95798 7.01658C3.19965 6.77491 3.59965 6.77491 3.84132 7.01658L9.27465 12.4499C9.67465 12.8499 10.3247 12.8499 10.7247 12.4499L16.158 7.01658C16.3996 6.77491 16.7997 6.77491 17.0413 7.01658C17.283 7.25824 17.283 7.65824 17.0413 7.89991L11.608 13.3332C11.1663 13.7749 10.583 13.9999 9.99965 13.9999Z"
-            fill="#1E293B"
-          />
-        </svg>
+        />
       </div>
 
       {isOpen && (
@@ -104,20 +99,7 @@ export function UserProfile() {
             onClick={handleLogout}
             className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors flex items-center gap-2"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" y1="12" x2="9" y2="12"></line>
-            </svg>
+            <Image src="/assets/icons/logout.svg" alt="" width={16} height={16} />
             Çıkış Yap
           </button>
         </div>

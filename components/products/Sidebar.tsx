@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { CategoryCheckbox } from "./CategoryCheckbox";
@@ -9,10 +10,10 @@ import { useProducts } from "@/store/productsContext";
 export function Sidebar() {
   const {
     categories,
-    currentCategory,
+    currentCategories,
     currentSearch,
     setSearchQuery,
-    setSelectedCategory,
+    toggleCategory,
     clearFilters,
   } = useProducts();
 
@@ -33,13 +34,6 @@ export function Sidebar() {
     return () => clearTimeout(timer);
   }, [localSearch, currentSearch, setSearchQuery]);
 
-  const handleCategoryChange = useCallback(
-    (slug: string) => {
-      setSelectedCategory(currentCategory === slug ? "" : slug);
-    },
-    [currentCategory, setSelectedCategory],
-  );
-
   const handleClearFilters = useCallback(() => {
     setLocalSearch("");
     clearFilters();
@@ -49,28 +43,7 @@ export function Sidebar() {
     <aside className="w-[256px] shrink-0 flex flex-col gap-4">
       <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg px-4 focus-within:ring-2 focus-within:ring-[#00C800] focus-within:border-transparent transition-all">
         <div className="flex items-center pointer-events-none">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.58334 17.5C13.9556 17.5 17.5 13.9555 17.5 9.58329C17.5 5.21104 13.9556 1.66663 9.58334 1.66663C5.21108 1.66663 1.66667 5.21104 1.66667 9.58329C1.66667 13.9555 5.21108 17.5 9.58334 17.5Z"
-              stroke="#94A3B8"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M18.3333 18.3333L16.6667 16.6666"
-              stroke="#94A3B8"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image src="/assets/icons/search-sidebar.svg" alt="" width={20} height={20} />
         </div>
         <Input
           type="text"
@@ -82,8 +55,13 @@ export function Sidebar() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="text-[18px] font-bold text-[#1E293B] pb-2 border-b-5 border-black">
+        <div className="flex items-center text-[18px] font-bold text-[#1E293B] pb-2 border-b-5 border-black">
           Kategoriler
+          {currentCategories.length > 0 && (
+            <span className="ml-2 text-sm font-semibold text-white bg-[#00B500] rounded-full px-2 py-0.5">
+              {currentCategories.length}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-4 mt-2 max-h-100 overflow-y-auto pr-1">
@@ -92,8 +70,8 @@ export function Sidebar() {
               key={category.slug}
               id={`category-${category.slug}`}
               label={category.name}
-              checked={currentCategory === category.slug}
-              onChange={() => handleCategoryChange(category.slug)}
+              checked={currentCategories.includes(category.slug)}
+              onChange={() => toggleCategory(category.slug)}
             />
           ))}
         </div>

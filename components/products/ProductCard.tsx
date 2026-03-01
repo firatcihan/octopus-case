@@ -53,21 +53,17 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="flex items-center gap-1">
           {[1, 2, 3, 4, 5].map((star) => (
-            <svg
+            <Image
               key={star}
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill={star <= Math.round(product.rating) ? "#1E293B" : "none"}
-              stroke={
-                star <= Math.round(product.rating) ? "#1E293B" : "#CBD5E1"
+              src={
+                star <= Math.round(product.rating)
+                  ? "/assets/icons/star-card-filled.svg"
+                  : "/assets/icons/star-card-empty.svg"
               }
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
+              alt=""
+              width={16}
+              height={16}
+            />
           ))}
           <span className="text-[12px] text-[#94A3B8] ml-1">
             ({product.rating.toFixed(1)})
@@ -75,7 +71,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <Button fullWidth className="mt-2">
+      <Button fullWidth className="mt-2 cursor-pointer">
         Sepete Ekle
       </Button>
     </div>
