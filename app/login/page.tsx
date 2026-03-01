@@ -21,7 +21,7 @@ export default function Login() {
         {/* Logo */}
         <div className="px-12">
           <Image
-            src="/logo.png"
+            src="/assets/logos/logo.png"
             alt="Octopus Logo"
             width={180}
             height={40}
@@ -34,7 +34,7 @@ export default function Login() {
           {/* Illustration */}
           <div className="flex justify-center mb-[64px]">
             <Image
-              src="/login-image.png"
+              src="/assets/images/login-image.png"
               alt="Content Creator Illustration"
               width={411}
               height={411}

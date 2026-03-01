@@ -9,7 +9,7 @@ export function Header() {
       <div className="flex items-center">
         <Link href="/products" className="transition-opacity hover:opacity-80">
           <Image
-            src="/header-logo.png"
+            src="/assets/logos/header-logo.png"
             alt="Octopus Logo"
             width={170}
             height={35}
