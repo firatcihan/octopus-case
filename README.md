@@ -19,8 +19,6 @@ npm install
 yarn install
 
 # 2. Ortam degiskeni dosyasini olusturun
-cp .env.local.example .env.local
-# veya manuel olarak:
 echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
 
 # 3. Gelistirme sunucusunu baslatin
@@ -118,8 +116,6 @@ npm install
 yarn install
 
 # 2. Create environment variable file
-cp .env.local.example .env.local
-# or manually:
 echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
 
 # 3. Start development server
