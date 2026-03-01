@@ -14,10 +14,17 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Octopus Shop",
-    template: "%s | Octopus Shop",
+    default: "Octopus Mini E-Ticaret",
+    template: "%s | Octopus Mini E-Ticaret",
   },
-  description: "Mini e-ticaret uygulaması.",
+  description:
+    "Octopus Mini E-Ticaret — En uygun fiyatlarla elektronik, giyim, aksesuar ve daha fazlasını keşfedin.",
+  keywords: ["e-ticaret", "online alışveriş", "octopus mini e-ticaret"],
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    siteName: "Octopus Mini E-Ticaret",
+  },
 };
 
 export default function RootLayout({
@@ -26,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="tr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

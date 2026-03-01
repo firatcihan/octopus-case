@@ -43,7 +43,12 @@ export function Sidebar() {
     <aside className="w-[256px] shrink-0 flex flex-col gap-4">
       <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg px-4 focus-within:ring-2 focus-within:ring-[#00C800] focus-within:border-transparent transition-all">
         <div className="flex items-center pointer-events-none">
-          <Image src="/assets/icons/search-sidebar.svg" alt="" width={20} height={20} />
+          <Image
+            src="/assets/icons/search-sidebar.svg"
+            alt=""
+            width={20}
+            height={20}
+          />
         </div>
         <Input
           type="text"
@@ -79,7 +84,7 @@ export function Sidebar() {
 
       <Button
         fullWidth
-        className="bg-[#1E293B] font-medium hover:bg-[#0F172A] text-white"
+        className="bg-[#1E293B] font-medium hover:bg-[#0F172A] cursor-pointer text-white"
         onClick={handleClearFilters}
       >
         Filtreleri Temizle

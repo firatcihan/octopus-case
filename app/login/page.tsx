@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
 import { LoginForm } from "../../components/auth/LoginForm";
+
+export const metadata: Metadata = {
+  title: "Giriş Yap",
+  description:
+    "Octopus Mini E-Ticaret hesabınıza giriş yapın. Alışverişe başlamak için kullanıcı adı ve şifrenizi girin.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function Login() {
   return (

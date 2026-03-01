@@ -71,7 +71,7 @@ function HeaderSearchInner() {
           />
           <button
             type="submit"
-            className="text-[#94A3B8] hover:text-[#475569] shrink-0 ml-1"
+            className="text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center p-1 w-8 h-8 rounded-full hover:bg-gray-100 cursor-pointer shrink-0 ml-1"
           >
             <Image
               src="/assets/icons/search-header.svg"
@@ -84,7 +84,7 @@ function HeaderSearchInner() {
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="text-[#94A3B8] hover:text-[#475569] transition-colors flex items-center justify-center p-1 rounded-full hover:bg-gray-50"
+          className="text-gray-400 hover:text-gray-600 transition-colors flex items-center justify-center p-1 w-8 h-8 rounded-full hover:bg-gray-100 cursor-pointer"
           aria-label="Arama yap"
         >
           <Image
@@ -103,7 +103,7 @@ export function HeaderSearch() {
   return (
     <Suspense
       fallback={
-        <div className="flex items-center justify-center p-1 w-8 h-8 rounded-full text-[#94A3B8]">
+        <div className="text-gray-400 flex items-center justify-center p-1 w-8 h-8 rounded-full">
           <Image
             src="/assets/icons/search-header.svg"
             alt="Search"

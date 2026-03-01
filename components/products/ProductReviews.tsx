@@ -93,7 +93,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
         <div>
           <Button
             onClick={() => setShowAll((prev) => !prev)}
-            className="bg-[#1e293b] hover:bg-[#0f172a] text-white text-sm font-medium px-6.5 py-3 h-auto rounded-lg"
+            className="bg-[#1e293b] hover:bg-[#0f172a] text-white cursor-pointer text-sm font-medium px-6.5 py-3 h-auto rounded-lg"
           >
             {showAll ? "Daha Az Göster" : "Tümünü Gör"}
           </Button>
