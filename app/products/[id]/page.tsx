@@ -1,7 +1,9 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Header } from "@/components/layout/Header";
 import { getSingleProductApi } from "@/lib/api/products";
+import { ApiError } from "@/lib/api/client";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductOptions } from "@/components/products/ProductOptions";
 import { ProductReviews } from "@/components/products/ProductReviews";
@@ -39,17 +41,23 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const product = await getSingleProductApi(resolvedParams.id);
-
-  return {
-    title: product.title,
-    description: product.description,
-  };
+  try {
+    const product = await getSingleProductApi(resolvedParams.id);
+    return { title: product.title, description: product.description };
+  } catch {
+    return { title: "Ürün Bulunamadı" };
+  }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const resolvedParams = await params;
-  const product = await getSingleProductApi(resolvedParams.id);
+  let product;
+  try {
+    product = await getSingleProductApi(resolvedParams.id);
+  } catch (err) {
+    if (err instanceof ApiError && err.status === 404) notFound();
+    throw err;
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col pb-24">

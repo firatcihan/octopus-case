@@ -90,7 +90,18 @@ export function LoginForm() {
         </div>
 
         {/* Error Message */}
-        {error && <p className="text-red-500 text-[13px] mb-3">{error}</p>}
+        {error && (
+          <div className="flex items-center gap-2 mb-4 p-3 text-[13px] text-red-600 bg-red-50 border border-red-200 rounded-lg">
+            <Image
+              src="/assets/icons/alert-circle.svg"
+              alt=""
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
+            <p className="font-medium">{error}</p>
+          </div>
+        )}
 
         {/* Remember Me */}
         <div className="flex items-center mb-7">
