@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { Checkbox } from "../ui/Checkbox";
@@ -14,6 +14,7 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const login = useAuthStore((s) => s.login);
   const isLoading = useAuthStore((s) => s.isLoading);
   const error = useAuthStore((s) => s.error);
@@ -25,7 +26,9 @@ export function LoginForm() {
 
     try {
       await login(username, password);
-      router.push("/products");
+      const redirectTo = searchParams.get("redirect");
+      const safePath = redirectTo?.startsWith("/") ? redirectTo : "/products";
+      router.push(safePath);
     } catch {
       // Error is already set in the store
     }

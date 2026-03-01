@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { UserProfile } from "./UserProfile";
-import { CartBadge } from "./CartBadge";
+import { HeaderActions } from "./HeaderActions";
 
 export function Header() {
   return (
@@ -34,9 +33,8 @@ export function Header() {
           <div className="text-gray-400 hover:text-gray-600">
             <Image src="/assets/icons/bell.svg" alt="" width={24} height={24} />
           </div>
-          <CartBadge />
+          <HeaderActions />
         </div>
-        <UserProfile />
       </div>
     </header>
   );

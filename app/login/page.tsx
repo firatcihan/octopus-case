@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Image from "next/image";
 import { LoginForm } from "../../components/auth/LoginForm";
 
@@ -48,7 +49,9 @@ export default function Login() {
 
       {/* Right Column */}
       <div className="flex-615 flex items-center justify-center p-8">
-        <LoginForm />
+        <Suspense>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );
