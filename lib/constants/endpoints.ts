@@ -12,5 +12,6 @@ export const API_ENDPOINTS = {
   },
   CARTS: {
     ADD: "/carts/add",
+    UPDATE: "/carts",
   },
 } as const;

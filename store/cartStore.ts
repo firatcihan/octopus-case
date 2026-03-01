@@ -4,7 +4,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { CartItem } from "@/lib/types/cart.types";
 import type { Product } from "@/lib/types/product.types";
-import { addCartApi } from "@/lib/api/cart";
+import { addCartApi, updateCartApi } from "@/lib/api/cart";
 import { withAuth } from "@/lib/api/client";
 import { useAuthStore } from "./authStore";
 
@@ -13,8 +13,9 @@ interface CartState {
 }
 
 interface CartActions {
-  addItem: (product: Product, quantity?: number) => Promise<void>;
-  removeItem: (productId: number) => void;
+  addItem: (product: Product, quantity: number, userId: number) => Promise<void>;
+  removeItem: (productId: number) => Promise<void>;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartState & CartActions>()(
@@ -22,7 +23,7 @@ export const useCartStore = create<CartState & CartActions>()(
     (set, get) => ({
       items: [],
 
-      addItem: async (product: Product, quantity = 1) => {
+      addItem: async (product: Product, quantity = 1, userId: number) => {
         const { items } = get();
 
         // Optimistic update
@@ -51,18 +52,36 @@ export const useCartStore = create<CartState & CartActions>()(
           });
         }
 
-        const user = useAuthStore.getState().user;
-
         try {
           await withAuth(
             (token) =>
               addCartApi(
                 {
-                  userId: user?.id ?? 0,
+                  userId,
                   products: [{ id: product.id, quantity }],
                 },
                 token,
               ),
+            () => useAuthStore.getState().tokens?.accessToken,
+            () => useAuthStore.getState().refreshAuth(),
+          );
+        } catch (error) {
+          set({ items: prevItems });
+          throw error;
+        }
+      },
+
+      removeItem: async (productId: number) => {
+        const { items } = get();
+        const prevItems = [...items];
+
+        // Optimistic update
+        set({ items: items.filter((item) => item.id !== productId) });
+
+        try {
+          await withAuth(
+            (token) =>
+              updateCartApi(1, [{ id: productId, quantity: 0 }], token),
             () => useAuthStore.getState().tokens?.accessToken,
             () => useAuthStore.getState().refreshAuth(),
           );
@@ -71,10 +90,8 @@ export const useCartStore = create<CartState & CartActions>()(
         }
       },
 
-      removeItem: (productId: number) => {
-        set((state) => ({
-          items: state.items.filter((item) => item.id !== productId),
-        }));
+      clearCart: () => {
+        set({ items: [] });
       },
     }),
     {

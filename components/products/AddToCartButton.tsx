@@ -21,6 +21,7 @@ export function AddToCartButton({
 }: AddToCartButtonProps) {
   const addItem = useCartStore((state) => state.addItem);
   const tokens = useAuthStore((state) => state.tokens);
+  const user = useAuthStore((state) => state.user);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -33,9 +34,14 @@ export function AddToCartButton({
     }
 
     setLoading(true);
-    await addItem(product);
-    setLoading(false);
-    toast.success(`"${product.title}" sepete eklendi!`);
+    try {
+      await addItem(product, 1, user?.id ?? 0);
+      toast.success(`"${product.title}" sepete eklendi!`);
+    } catch {
+      toast.error("Ürün sepete eklenemedi. Lütfen tekrar deneyin.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
