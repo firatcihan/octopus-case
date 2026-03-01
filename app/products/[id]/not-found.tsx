@@ -8,17 +8,17 @@ export default function ProductNotFound() {
       <Header />
 
       <div className="flex-1 flex flex-col items-center justify-center gap-6 text-center px-8">
-        <span className="text-8xl font-bold text-[#E2E8F0]">404</span>
+        <div className="text-8xl font-bold text-[#00B500]">404</div>
         <div className="flex flex-col gap-2">
-          <h1 className="text-2xl font-bold text-[#1E293B]">
+          <div className="text-2xl font-bold text-[#1E293B]">
             Aradığınız ürün bulunamadı
-          </h1>
+          </div>
           <p className="text-[#94A3B8] text-base">
             Bu ürün mevcut değil veya kaldırılmış olabilir.
           </p>
         </div>
         <Link href="/products">
-          <Button>Ürünlere Dön</Button>
+          <Button className="w-40 cursor-pointer">Ürünlere Dön</Button>
         </Link>
       </div>
     </div>
