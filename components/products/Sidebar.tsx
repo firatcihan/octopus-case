@@ -10,10 +10,10 @@ import { useProducts } from "@/store/productsContext";
 export function Sidebar() {
   const {
     categories,
-    currentCategory,
+    currentCategories,
     currentSearch,
     setSearchQuery,
-    setSelectedCategory,
+    toggleCategory,
     clearFilters,
   } = useProducts();
 
@@ -33,13 +33,6 @@ export function Sidebar() {
     }, 400);
     return () => clearTimeout(timer);
   }, [localSearch, currentSearch, setSearchQuery]);
-
-  const handleCategoryChange = useCallback(
-    (slug: string) => {
-      setSelectedCategory(currentCategory === slug ? "" : slug);
-    },
-    [currentCategory, setSelectedCategory],
-  );
 
   const handleClearFilters = useCallback(() => {
     setLocalSearch("");
@@ -62,8 +55,13 @@ export function Sidebar() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="text-[18px] font-bold text-[#1E293B] pb-2 border-b-5 border-black">
+        <div className="flex items-center text-[18px] font-bold text-[#1E293B] pb-2 border-b-5 border-black">
           Kategoriler
+          {currentCategories.length > 0 && (
+            <span className="ml-2 text-sm font-semibold text-white bg-[#00B500] rounded-full px-2 py-0.5">
+              {currentCategories.length}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col gap-4 mt-2 max-h-100 overflow-y-auto pr-1">
@@ -72,8 +70,8 @@ export function Sidebar() {
               key={category.slug}
               id={`category-${category.slug}`}
               label={category.name}
-              checked={currentCategory === category.slug}
-              onChange={() => handleCategoryChange(category.slug)}
+              checked={currentCategories.includes(category.slug)}
+              onChange={() => toggleCategory(category.slug)}
             />
           ))}
         </div>

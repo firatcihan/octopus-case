@@ -9,7 +9,7 @@ import { PRODUCTS_PER_PAGE } from "@/lib/constants/app";
 interface ProductsPageProps {
   searchParams: Promise<{
     q?: string;
-    category?: string;
+    categories?: string;
     page?: string;
   }>;
 }
@@ -19,14 +19,14 @@ export async function generateMetadata({
 }: ProductsPageProps): Promise<Metadata> {
   const params = await searchParams;
   const search = params.q;
-  const category = params.category;
+  const categories = (params.categories ?? "").split(",").filter(Boolean);
   const page = params.page ? Number(params.page) : undefined;
 
   let title = "Ürünler";
   const parts: string[] = [];
 
   if (search) parts.push(`"${search}" araması`);
-  if (category) parts.push(category);
+  if (categories.length > 0) parts.push(categories.join(", "));
   if (page && page > 1) parts.push(`Sayfa ${page}`);
 
   if (parts.length > 0) title = `${title} — ${parts.join(", ")}`;
@@ -35,8 +35,8 @@ export async function generateMetadata({
     title,
     description: search
       ? `"${search}" için ürün arama sonuçları.`
-      : category
-        ? `${category} kategorisindeki ürünleri keşfedin.`
+      : categories.length > 0
+        ? `${categories.join(", ")} kategorilerindeki ürünleri keşfedin.`
         : "Tüm ürünleri keşfedin. Kategoriye göre filtreleyin veya arama yapın.",
   };
 }
@@ -47,11 +47,11 @@ export default async function ProductsPage({
   const params = await searchParams;
 
   const search = params.q ?? "";
-  const category = params.category ?? "";
+  const categories = (params.categories ?? "").split(",").filter(Boolean);
   const page = Math.max(1, Number(params.page) || 1);
 
-  const [productsData, categories] = await Promise.all([
-    getProductsApi(search, category, page),
+  const [productsData, categoriesList] = await Promise.all([
+    getProductsApi(search, categories, page),
     getCategoriesApi(),
   ]);
 
@@ -61,9 +61,9 @@ export default async function ProductsPage({
 
       <main className="flex-1 max-w-360 w-full mx-auto px-8 py-8 flex gap-12">
         <ProductsProvider
-          categories={categories}
+          categories={categoriesList}
           currentSearch={search}
-          currentCategory={category}
+          currentCategories={categories}
           currentPage={page}
         >
           <Sidebar />
