@@ -71,7 +71,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <Button fullWidth className="mt-2">
+      <Button fullWidth className="mt-2 cursor-pointer">
         Sepete Ekle
       </Button>
     </div>

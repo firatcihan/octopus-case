@@ -34,7 +34,7 @@ export function ProductStickyBar({ product }: ProductStickyBarProps) {
           <span className="text-4xl font-medium text-black">
             ${product.price.toFixed(2)}
           </span>
-          <Button className="bg-[#00B500] hover:bg-[#00b82b] text-white leading-5 font-medium px-8 py-3 h-auto rounded-lg text-sm">
+          <Button className="bg-[#00B500] hover:bg-[#00b82b] text-white cursor-pointer leading-5 font-medium px-8 py-3 h-auto rounded-lg text-sm">
             Sepete Ekle
           </Button>
         </div>
