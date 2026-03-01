@@ -1,26 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/store/authStore";
 import { CartBadge } from "./CartBadge";
 import { UserProfile } from "./UserProfile";
 
+function useHydrated() {
+  return useSyncExternalStore(
+    (cb) => useAuthStore.persist.onFinishHydration(cb),
+    () => useAuthStore.persist.hasHydrated(),
+    () => false,
+  );
+}
+
 export function HeaderActions() {
   const tokens = useAuthStore((state) => state.tokens);
-  const [hydrated, setHydrated] = useState(() =>
-    useAuthStore.persist.hasHydrated(),
-  );
-
-  useEffect(() => {
-    if (hydrated) return;
-
-    const unsub = useAuthStore.persist.onFinishHydration(() => {
-      setHydrated(true);
-    });
-
-    return unsub;
-  }, [hydrated]);
+  const hydrated = useHydrated();
 
   if (!hydrated) {
     return (

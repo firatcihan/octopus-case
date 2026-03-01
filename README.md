@@ -13,6 +13,8 @@ Mini e-ticaret uygulamasi. Kullanici girisi, urun listeleme ve urun detay sayfal
 ```bash
 # 1. Bagimliliklari yukleyin
 npm install
+# veya
+yarn install
 
 # 2. Ortam degiskeni dosyasini olusturun
 cp .env.local.example .env.local
@@ -21,6 +23,8 @@ echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
 
 # 3. Gelistirme sunucusunu baslatin
 npm run dev
+# veya
+yarn dev
 ```
 
 Uygulama [http://localhost:3000](http://localhost:3000) adresinde calisir.
@@ -36,6 +40,9 @@ Uygulama [http://localhost:3000](http://localhost:3000) adresinde calisir.
 ```bash
 npm run build
 npm start
+# veya
+yarn build
+yarn start
 ```
 
 ### Test Giris Bilgileri
@@ -105,6 +112,8 @@ A mini e-commerce application with login, product listing, and product detail pa
 ```bash
 # 1. Install dependencies
 npm install
+# or
+yarn install
 
 # 2. Create environment variable file
 cp .env.local.example .env.local
@@ -113,6 +122,8 @@ echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
 
 # 3. Start development server
 npm run dev
+# or
+yarn dev
 ```
 
 The app runs at [http://localhost:3000](http://localhost:3000).
@@ -128,6 +139,9 @@ The app runs at [http://localhost:3000](http://localhost:3000).
 ```bash
 npm run build
 npm start
+# or
+yarn build
+yarn start
 ```
 
 ### Test Credentials
