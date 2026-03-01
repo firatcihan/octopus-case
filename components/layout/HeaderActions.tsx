@@ -8,19 +8,19 @@ import { UserProfile } from "./UserProfile";
 
 export function HeaderActions() {
   const tokens = useAuthStore((state) => state.tokens);
-  const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState(() =>
+    useAuthStore.persist.hasHydrated(),
+  );
 
   useEffect(() => {
+    if (hydrated) return;
+
     const unsub = useAuthStore.persist.onFinishHydration(() => {
       setHydrated(true);
     });
 
-    if (useAuthStore.persist.hasHydrated()) {
-      setHydrated(true);
-    }
-
     return unsub;
-  }, []);
+  }, [hydrated]);
 
   if (!hydrated) {
     return (
