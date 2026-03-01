@@ -31,14 +31,7 @@ export async function generateMetadata({
 
   if (parts.length > 0) title = `${title} — ${parts.join(", ")}`;
 
-  return {
-    title,
-    description: search
-      ? `"${search}" için ürün arama sonuçları.`
-      : categories.length > 0
-        ? `${categories.join(", ")} kategorilerindeki ürünleri keşfedin.`
-        : "Tüm ürünleri keşfedin. Kategoriye göre filtreleyin veya arama yapın.",
-  };
+  return { title };
 }
 
 export default async function ProductsPage({
