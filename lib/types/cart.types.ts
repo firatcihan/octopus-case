@@ -23,8 +23,3 @@ export interface AddCartRequest {
   userId: number;
   products: CartProduct[];
 }
-
-export interface UpdateCartRequest {
-  merge: boolean;
-  products: CartProduct[];
-}

@@ -17,11 +17,11 @@ export async function loginApi(
   });
 }
 
-export async function getMeApi(accessToken: string): Promise<User> {
+export async function getMeApi(token: string): Promise<User> {
   return request<User>(API_ENDPOINTS.AUTH.ME, {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 }

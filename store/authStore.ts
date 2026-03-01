@@ -3,7 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { User, AuthTokens } from "@/lib/types/auth.types";
-import { loginApi, refreshTokenApi } from "@/lib/api/auth";
+import { loginApi, refreshTokenApi, getMeApi } from "@/lib/api/auth";
 
 interface AuthState {
   user: User | null;
@@ -16,6 +16,7 @@ interface AuthActions {
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   refreshAuth: () => Promise<boolean>;
+  validateSession: () => Promise<void>;
   clearError: () => void;
 }
 
@@ -90,6 +91,28 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         } catch {
           get().logout();
           return false;
+        }
+      },
+
+      validateSession: async () => {
+        const { tokens } = get();
+        if (!tokens?.accessToken) return;
+
+        try {
+          const user = await getMeApi(tokens.accessToken);
+          set({ user });
+        } catch {
+          const refreshed = await get().refreshAuth();
+          if (!refreshed) return;
+
+          try {
+            const newTokens = get().tokens;
+            if (!newTokens?.accessToken) return;
+            const user = await getMeApi(newTokens.accessToken);
+            set({ user });
+          } catch {
+            get().logout();
+          }
         }
       },
 

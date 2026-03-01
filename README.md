@@ -1,36 +1,185 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Octopus Case — Mini E-Commerce
 
-## Getting Started
+> [English version below](#english)
 
-First, run the development server:
+---
+
+## Turkce
+
+Mini e-ticaret uygulamasi. Kullanici girisi, urun listeleme ve urun detay sayfalarindan olusur. Backend olarak [DummyJSON](https://dummyjson.com) API kullanilir.
+
+### Kurulum ve Calistirma
 
 ```bash
+# 1. Bagimliliklari yukleyin
+npm install
+
+# 2. Ortam degiskeni dosyasini olusturun
+cp .env.local.example .env.local
+# veya manuel olarak:
+echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
+
+# 3. Gelistirme sunucusunu baslatin
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Uygulama [http://localhost:3000](http://localhost:3000) adresinde calisir.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Ortam Degiskenleri
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Degisken | Aciklama | Ornek Deger |
+|---|---|---|
+| `NEXT_PUBLIC_API_BASE_URL` | DummyJSON API adresi | `https://dummyjson.com` |
 
-## Learn More
+### Uretim Derlemesi
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Test Giris Bilgileri
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+Kullanici adi: emilys
+Sifre:         emilyspass
+```
 
-## Deploy on Vercel
+### Sayfalar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Sayfa | Yol | Aciklama |
+|---|---|---|
+| Giris | `/login` | Kullanici girisi. Basarili giriste `/products` sayfasina yonlendirir. |
+| Urun Listesi | `/products` | Kategori filtresi, arama ve sayfalama. Sayfa basina 9 urun. |
+| Urun Detay | `/products/[id]` | Urun bilgileri, gorseller, yorumlar ve sepete ekleme. |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`/products` ve `/products/[id]` sayfalari oturum gerektirir. Giris yapilmamissa `/login` sayfasina yonlendirilir.
+
+### Teknolojiler
+
+- **Next.js 16** — App Router ile sayfa yonetimi
+- **TypeScript** — Strict mod, `any` kullanilmaz
+- **Tailwind CSS v4** — Stil yonetimi
+- **Zustand 5** — Global state (oturum ve sepet)
+- **Native fetch** — HTTP istekleri
+
+### Proje Yapisi
+
+```
+app/
+  login/              Giris sayfasi
+  products/
+    (list)/           Urun listesi
+    [id]/             Urun detay
+components/
+  auth/               Giris formu
+  layout/             Header, navbar
+  products/           Urun karti, filtreler, sayfalama
+  ui/                 Button, Input, Checkbox
+lib/
+  api/                API cagri fonksiyonlari
+  constants/          Endpoint tanimlari
+  types/              TypeScript tip tanimlari
+store/
+  authStore.ts        Oturum yonetimi (Zustand + localStorage)
+  cartStore.ts        Sepet yonetimi (Zustand + localStorage)
+```
+
+### Isleyis
+
+- Sayfalar varsayilan olarak Server Component. Kullanici etkilesimi gerektiren bilesenler `"use client"` ile isaretlenir.
+- Tum API cagrilari `lib/api/` altindaki merkezi fonksiyonlar uzerinden yapilir.
+- Oturum bilgisi Zustand store'da tutulur ve localStorage ile kalici hale getirilir.
+- Sepet islemleri optimistic update ile calisir; hata durumunda geri alinir.
+
+---
+
+<a id="english"></a>
+
+## English
+
+A mini e-commerce application with login, product listing, and product detail pages. Uses [DummyJSON](https://dummyjson.com) as the backend API.
+
+### Setup and Running
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Create environment variable file
+cp .env.local.example .env.local
+# or manually:
+echo "NEXT_PUBLIC_API_BASE_URL=https://dummyjson.com" > .env.local
+
+# 3. Start development server
+npm run dev
+```
+
+The app runs at [http://localhost:3000](http://localhost:3000).
+
+### Environment Variables
+
+| Variable | Description | Example |
+|---|---|---|
+| `NEXT_PUBLIC_API_BASE_URL` | DummyJSON API base URL | `https://dummyjson.com` |
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+### Test Credentials
+
+```
+Username: emilys
+Password: emilyspass
+```
+
+### Pages
+
+| Page | Path | Description |
+|---|---|---|
+| Login | `/login` | User authentication. Redirects to `/products` on success. |
+| Product List | `/products` | Category filter, search, and pagination. 9 products per page. |
+| Product Detail | `/products/[id]` | Product info, images, comments, and add-to-cart. |
+
+`/products` and `/products/[id]` are protected routes. Unauthenticated users are redirected to `/login`.
+
+### Tech Stack
+
+- **Next.js 16** — App Router for page management
+- **TypeScript** — Strict mode, no `any`
+- **Tailwind CSS v4** — Styling
+- **Zustand 5** — Global state (auth and cart)
+- **Native fetch** — HTTP requests
+
+### Project Structure
+
+```
+app/
+  login/              Login page
+  products/
+    (list)/           Product listing
+    [id]/             Product detail
+components/
+  auth/               Login form
+  layout/             Header, navbar
+  products/           Product card, filters, pagination
+  ui/                 Button, Input, Checkbox
+lib/
+  api/                API call functions
+  constants/          Endpoint definitions
+  types/              TypeScript type definitions
+store/
+  authStore.ts        Auth state (Zustand + localStorage)
+  cartStore.ts        Cart state (Zustand + localStorage)
+```
+
+### How It Works
+
+- Pages are Server Components by default. Components requiring user interaction use `"use client"`.
+- All API calls go through centralized functions in `lib/api/`.
+- Session data is managed via Zustand and persisted with localStorage.
+- Cart operations use optimistic updates with rollback on failure.
