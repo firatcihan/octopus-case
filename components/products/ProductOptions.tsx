@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const COLORS = [
@@ -73,21 +74,7 @@ export function ProductOptions() {
               </div>
               {selectedColor === color.id && (
                 <div className="w-5 h-5 rounded-full bg-[#5cb85c] flex items-center justify-center">
-                  <svg
-                    width="10"
-                    height="8"
-                    viewBox="0 0 10 8"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 4L3.5 6.5L9 1"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <Image src="/assets/icons/check.svg" alt="" width={10} height={8} />
                 </div>
               )}
             </button>

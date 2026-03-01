@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { cn } from "../../lib/utils";
 
 export const Checkbox = React.forwardRef<
@@ -17,18 +18,13 @@ export const Checkbox = React.forwardRef<
         )}
         {...props}
       />
-      <svg
-        className="absolute w-3.5 h-3.5 pointer-events-none opacity-0 peer-checked:opacity-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
+      <Image
+        src="/assets/icons/check-checkbox.svg"
+        alt=""
+        width={14}
+        height={14}
+        className="absolute pointer-events-none opacity-0 peer-checked:opacity-100 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+      />
     </div>
   );
 });

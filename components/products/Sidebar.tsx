@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { CategoryCheckbox } from "./CategoryCheckbox";
@@ -49,28 +50,7 @@ export function Sidebar() {
     <aside className="w-[256px] shrink-0 flex flex-col gap-4">
       <div className="flex items-center bg-white border border-[#E2E8F0] rounded-lg px-4 focus-within:ring-2 focus-within:ring-[#00C800] focus-within:border-transparent transition-all">
         <div className="flex items-center pointer-events-none">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.58334 17.5C13.9556 17.5 17.5 13.9555 17.5 9.58329C17.5 5.21104 13.9556 1.66663 9.58334 1.66663C5.21108 1.66663 1.66667 5.21104 1.66667 9.58329C1.66667 13.9555 5.21108 17.5 9.58334 17.5Z"
-              stroke="#94A3B8"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M18.3333 18.3333L16.6667 16.6666"
-              stroke="#94A3B8"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image src="/assets/icons/search-sidebar.svg" alt="" width={20} height={20} />
         </div>
         <Input
           type="text"
