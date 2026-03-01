@@ -10,4 +10,8 @@ export const API_ENDPOINTS = {
     CATEGORY_BASE: "/products/category",
     CATEGORIES: "/products/categories",
   },
+  CARTS: {
+    BASE: "/carts",
+    ADD: "/carts/add",
+  },
 } as const;

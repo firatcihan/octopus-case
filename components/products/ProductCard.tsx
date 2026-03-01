@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/Button";
+import { AddToCartButton } from "./AddToCartButton";
 import type { Product } from "@/lib/types/product.types";
 
 interface ProductCardProps {
@@ -71,9 +71,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
       </div>
 
-      <Button fullWidth className="mt-2 cursor-pointer">
-        Sepete Ekle
-      </Button>
+      <AddToCartButton product={product} fullWidth className="mt-2 cursor-pointer" />
     </div>
   );
 }
