@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/Button";
 
 export default function ProductError({
@@ -13,8 +12,6 @@ export default function ProductError({
 }) {
   return (
     <div className="min-h-screen bg-white flex flex-col font-sans">
-      <Header />
-
       <div className="flex-1 flex flex-col items-center justify-center px-6 py-20">
         <div className="max-w-md w-full text-center flex flex-col items-center animate-in fade-in duration-500">
           <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mb-6">

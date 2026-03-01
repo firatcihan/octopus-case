@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { Header } from "@/components/layout/Header";
 import { getSingleProductApi } from "@/lib/api/products";
 import { ApiError } from "@/lib/api/client";
 import { ProductGallery } from "@/components/products/ProductGallery";
@@ -61,8 +60,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <div className="min-h-screen bg-white flex flex-col pb-24">
-      <Header />
-
       <div className="flex-1 max-w-360 w-full mx-auto px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-10.5">
           <div className="w-full lg:w-1/2">

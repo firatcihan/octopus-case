@@ -16,9 +16,13 @@ export class ApiError extends Error {
   }
 }
 
+export type NextFetchOptions = RequestInit & {
+  next?: { revalidate?: number | false; tags?: string[] };
+};
+
 export async function request<T>(
   endpoint: string,
-  options: RequestInit = {},
+  options: NextFetchOptions = {},
 ): Promise<T> {
   const url = `${BASE_URL}${endpoint}`;
 
@@ -40,4 +44,28 @@ export async function request<T>(
   }
 
   return response.json() as Promise<T>;
+}
+
+export async function withAuth<T>(
+  fn: (token: string) => Promise<T>,
+  getToken: () => string | undefined,
+  refreshToken: () => Promise<boolean>,
+): Promise<T> {
+  const token = getToken();
+  if (!token) throw new ApiError(401, "No access token");
+
+  try {
+    return await fn(token);
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 401) {
+      const refreshed = await refreshToken();
+      if (!refreshed) throw new ApiError(401, "Token refresh failed");
+
+      const newToken = getToken();
+      if (!newToken) throw new ApiError(401, "No access token after refresh");
+
+      return fn(newToken);
+    }
+    throw error;
+  }
 }

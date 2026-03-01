@@ -1,9 +1,5 @@
-"use client";
-
-import React from "react";
-import { useProducts } from "@/store/productsContext";
 import { ProductCard } from "./ProductCard";
-import { Pagination } from "../ui/Pagination";
+import { ProductPagination } from "./ProductPagination";
 import type { Product } from "@/lib/types/product.types";
 
 interface ProductListProps {
@@ -19,8 +15,6 @@ export function ProductList({
   currentPage,
   totalPages,
 }: ProductListProps) {
-  const { setPage } = useProducts();
-
   return (
     <div className="flex-1 flex flex-col gap-4">
       <div className="text-xl font-bold text-[#141A24]">
@@ -39,10 +33,9 @@ export function ProductList({
             ))}
           </div>
 
-          <Pagination
+          <ProductPagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={setPage}
           />
         </>
       )}

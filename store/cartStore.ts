@@ -5,6 +5,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import type { CartItem } from "@/lib/types/cart.types";
 import type { Product } from "@/lib/types/product.types";
 import { addCartApi } from "@/lib/api/cart";
+import { withAuth } from "@/lib/api/client";
 import { useAuthStore } from "./authStore";
 
 interface CartState {
@@ -50,14 +51,20 @@ export const useCartStore = create<CartState & CartActions>()(
           });
         }
 
-        // API call
-        const token = useAuthStore.getState().tokens?.accessToken;
         const user = useAuthStore.getState().user;
 
         try {
-          await addCartApi(
-            { userId: user?.id ?? 0, products: [{ id: product.id, quantity }] },
-            token,
+          await withAuth(
+            (token) =>
+              addCartApi(
+                {
+                  userId: user?.id ?? 0,
+                  products: [{ id: product.id, quantity }],
+                },
+                token,
+              ),
+            () => useAuthStore.getState().tokens?.accessToken,
+            () => useAuthStore.getState().refreshAuth(),
           );
         } catch {
           set({ items: prevItems });

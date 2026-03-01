@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HeaderActions } from "./HeaderActions";
+import { HeaderSearch } from "./HeaderSearch";
 
 export function Header() {
   return (
@@ -19,14 +20,7 @@ export function Header() {
       </div>
       <div className="flex items-center gap-2.5">
         <div className="flex items-center gap-4">
-          <div className="text-[#94A3B8]">
-            <Image
-              src="/assets/icons/search-header.svg"
-              alt=""
-              width={24}
-              height={24}
-            />
-          </div>
+          <HeaderSearch />
           <div className="text-gray-400 hover:text-gray-600">
             <Image src="/assets/icons/info.svg" alt="" width={24} height={24} />
           </div>

@@ -1,10 +1,10 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
-import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/products/Sidebar";
-import { ProductList } from "@/components/products/ProductList";
+import { ProductListServer } from "@/components/products/ProductListServer";
+import { ProductListSkeleton } from "@/components/products/ProductList";
 import { ProductsProvider } from "@/store/productsContext";
-import { getProductsApi, getCategoriesApi } from "@/lib/api/products";
-import { PRODUCTS_PER_PAGE } from "@/lib/constants/app";
+import { getCategoriesApi, getProductsApi } from "@/lib/api/products";
 
 interface ProductsPageProps {
   searchParams: Promise<{
@@ -43,15 +43,12 @@ export default async function ProductsPage({
   const categories = (params.categories ?? "").split(",").filter(Boolean);
   const page = Math.max(1, Number(params.page) || 1);
 
-  const [productsData, categoriesList] = await Promise.all([
-    getProductsApi(search, categories, page),
-    getCategoriesApi(),
-  ]);
+  // no waterfall
+  const productsDataPromise = getProductsApi(search, categories, page);
+  const categoriesList = await getCategoriesApi();
 
   return (
     <div className="min-h-screen bg-[#f8fafc] flex flex-col">
-      <Header />
-
       <main className="flex-1 max-w-360 w-full mx-auto px-8 py-8 flex gap-12">
         <ProductsProvider
           categories={categoriesList}
@@ -60,12 +57,15 @@ export default async function ProductsPage({
           currentPage={page}
         >
           <Sidebar />
-          <ProductList
-            products={productsData.products}
-            total={productsData.total}
-            currentPage={page}
-            totalPages={Math.ceil(productsData.total / PRODUCTS_PER_PAGE)}
-          />
+          <Suspense
+            key={`${search}-${categories.join(",")}-${page}`}
+            fallback={<ProductListSkeleton />}
+          >
+            <ProductListServer
+              productsDataPromise={productsDataPromise}
+              currentPage={page}
+            />
+          </Suspense>
         </ProductsProvider>
       </main>
     </div>

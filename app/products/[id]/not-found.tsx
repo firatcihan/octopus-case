@@ -1,12 +1,9 @@
 import Link from "next/link";
-import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui/Button";
 
 export default function ProductNotFound() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Header />
-
       <div className="flex-1 flex flex-col items-center justify-center gap-6 text-center px-8">
         <div className="text-8xl font-bold text-[#00B500]">404</div>
         <div className="flex flex-col gap-2">
