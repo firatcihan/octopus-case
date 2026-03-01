@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCartStore } from "@/store/cartStore";
+import toast from "react-hot-toast";
 
 export function CartBadge() {
   const items = useCartStore((state) => state.items);
@@ -129,6 +130,11 @@ export function CartBadge() {
             </div>
             <button
               disabled={items.length === 0}
+              onClick={() => {
+                useCartStore.setState({ items: [] });
+                setOpen(false);
+                toast.success("Siparişiniz onaylandı!");
+              }}
               className="w-full bg-[#00B500] hover:bg-[#008c01] disabled:opacity-50 disabled:cursor-not-allowed text-white text-[15px] font-medium py-3 rounded-lg transition-colors cursor-pointer"
             >
               Siparişi Tamamla

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { useCartStore } from "@/store/cartStore";
 import { useAuthStore } from "@/store/authStore";
 import type { Product } from "@/lib/types/product.types";
+import toast from "react-hot-toast";
 
 interface AddToCartButtonProps {
   product: Product;
@@ -34,6 +35,7 @@ export function AddToCartButton({
     setStatus("loading");
     await addItem(product);
     setStatus("success");
+    toast.success(`"${product.title}" sepete eklendi!`);
     setTimeout(() => setStatus("idle"), 2000);
   }
 

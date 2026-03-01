@@ -7,6 +7,7 @@ import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { Checkbox } from "../ui/Checkbox";
 import { useAuthStore } from "@/store/authStore";
+import toast from "react-hot-toast";
 
 export function LoginForm() {
   const [username, setUsername] = useState("");
@@ -26,16 +27,17 @@ export function LoginForm() {
 
     try {
       await login(username, password);
+      toast.success("Giriş başarılı!");
       const redirectTo = searchParams.get("redirect");
       const safePath = redirectTo?.startsWith("/") ? redirectTo : "/products";
       router.push(safePath);
     } catch {
-      // Error is already set in the store
+      toast.error("Kullanıcı adı veya şifre hatalı!");
     }
   };
 
   return (
-    <div className="w-full max-w-[400px]">
+    <div className="w-full max-w-100">
       <div className="text-center mb-10">
         <h2 className="text-[32px] font-bold text-[#1E293B] mb-2">
           Welcome Octopus!
