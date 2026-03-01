@@ -5,7 +5,7 @@ import { HeaderSearch } from "./HeaderSearch";
 
 export function Header() {
   return (
-    <header className="flex items-center justify-between px-10 h-[92px] bg-white border-b border-[#E2E8F0]">
+    <header className="flex items-center justify-between px-10 h-23 bg-white border-b border-[#E2E8F0]">
       <div className="flex items-center">
         <Link href="/products" className="transition-opacity hover:opacity-80">
           <Image

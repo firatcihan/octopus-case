@@ -9,7 +9,7 @@ export default function ProductDetailLoading() {
               {Array.from({ length: 4 }).map((_, i) => (
                 <div
                   key={i}
-                  className="flex-shrink-0 w-24 h-24 bg-gray-200 rounded-lg"
+                  className="shrink-0 w-24 h-24 bg-gray-200 rounded-lg"
                 ></div>
               ))}
             </div>
@@ -29,18 +29,18 @@ export default function ProductDetailLoading() {
               <div>
                 <div className="h-5 bg-gray-200 w-24 rounded mb-3"></div>
                 <div className="flex gap-4">
-                  <div className="w-[145px] h-[45px] bg-gray-200"></div>
-                  <div className="w-[145px] h-[45px] bg-gray-200"></div>
+                  <div className="w-36.25 h-11.25 bg-gray-200"></div>
+                  <div className="w-36.25 h-11.25 bg-gray-200"></div>
                 </div>
               </div>
 
               <div>
                 <div className="h-5 bg-gray-200 w-24 rounded mb-3"></div>
                 <div className="grid grid-cols-2 gap-4 w-fit">
-                  <div className="w-[189px] h-[100px] bg-gray-200"></div>
-                  <div className="w-[189px] h-[100px] bg-gray-200"></div>
-                  <div className="w-[189px] h-[100px] bg-gray-200"></div>
-                  <div className="w-[189px] h-[100px] bg-gray-200"></div>
+                  <div className="w-47.25 h-25 bg-gray-200"></div>
+                  <div className="w-47.25 h-25 bg-gray-200"></div>
+                  <div className="w-47.25 h-25 bg-gray-200"></div>
+                  <div className="w-47.25 h-25 bg-gray-200"></div>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ export default function ProductDetailLoading() {
 
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
         <div className="px-9 h-25 flex items-center justify-between animate-pulse">
-          <div className="flex items-center h-full flex-1 hidden md:flex">
+          <div className="flex items-center h-full flex-1 md:flex">
             <div className="h-full flex items-center pr-8">
               <div className="h-6 w-32 bg-gray-200 rounded"></div>
             </div>
@@ -85,7 +85,7 @@ export default function ProductDetailLoading() {
 
           <div className="flex items-center justify-end gap-4 pl-8 w-full md:w-auto">
             <div className="h-10 w-24 bg-gray-200 rounded"></div>
-            <div className="w-[140px] h-[48px] bg-gray-200 rounded-lg"></div>
+            <div className="w-35 h-12 bg-gray-200 rounded-lg"></div>
           </div>
         </div>
       </div>

@@ -67,7 +67,7 @@ function HeaderSearchInner() {
             onChange={(e) => setQuery(e.target.value)}
             onBlur={handleBlur}
             placeholder="Ürün ara..."
-            className="bg-transparent border-none outline-none focus:ring-0 text-sm w-[150px] text-[#1E293B] placeholder-[#94A3B8]"
+            className="bg-transparent border-none outline-none focus:ring-0 text-sm w-37.5 text-[#1E293B] placeholder-[#94A3B8]"
           />
           <button
             type="submit"

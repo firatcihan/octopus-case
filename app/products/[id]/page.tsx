@@ -14,15 +14,15 @@ function ProductOptionsSkeleton() {
       <div>
         <div className="h-4 w-20 bg-gray-200 rounded mb-3" />
         <div className="flex gap-4">
-          <div className="w-[145px] h-[45px] bg-gray-200 rounded" />
-          <div className="w-[145px] h-[45px] bg-gray-200 rounded" />
+          <div className="w-36.25 h-11.25 bg-gray-200 rounded" />
+          <div className="w-36.25 h-11.25 bg-gray-200 rounded" />
         </div>
       </div>
       <div>
         <div className="h-4 w-24 bg-gray-200 rounded mb-3" />
         <div className="grid grid-cols-2 gap-4 w-fit">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="w-[189px] h-[100px] bg-gray-200 rounded" />
+            <div key={i} className="w-47.25 h-25 bg-gray-200 rounded" />
           ))}
         </div>
       </div>
