@@ -47,7 +47,6 @@ export function ProductOptions() {
 
   return (
     <div className="flex flex-col gap-14">
-      {/* Color Selection */}
       <div>
         <h3 className="text-base font-bold text-black mb-3">Renk Seç:</h3>
         <div className="flex gap-4">
@@ -55,7 +54,7 @@ export function ProductOptions() {
             <button
               key={color.id}
               onClick={() => updateParam("color", color.id)}
-              className={`flex items-center w-[145px] h-[45px] rounded-none border transition-all ${
+              className={`flex items-center w-36.25 h-11.25 rounded-none border transition-all ${
                 selectedColor === color.id
                   ? "border-transparent bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
                   : "border-gray-200 bg-white hover:bg-gray-50"
@@ -82,7 +81,6 @@ export function ProductOptions() {
         </div>
       </div>
 
-      {/* Feature Selection */}
       <div>
         <h3 className="text-base font-bold text-black mb-3">Özellik Seç:</h3>
         <div className="grid grid-cols-2 gap-4 w-fit">
@@ -90,7 +88,7 @@ export function ProductOptions() {
             <button
               key={feature.id}
               onClick={() => updateParam("feature", feature.id)}
-              className={`flex flex-col items-start p-4 w-[189px] h-[100px] rounded-none border text-left transition-all ${
+              className={`flex flex-col items-start p-4 w-47.25 h-25 rounded-none border text-left transition-all ${
                 selectedFeature === feature.id
                   ? "border-transparent bg-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)]"
                   : "border-gray-200 bg-white hover:bg-gray-50"
@@ -103,7 +101,7 @@ export function ProductOptions() {
                   {feature.title}
                 </span>
                 {selectedFeature === feature.id && (
-                  <div className="w-5 h-5 rounded-full bg-[#5cb85c] flex items-center justify-center flex-shrink-0 ml-2">
+                  <div className="w-5 h-5 rounded-full bg-[#5cb85c] flex items-center justify-center shrink-0 ml-2">
                     <svg
                       width="10"
                       height="8"

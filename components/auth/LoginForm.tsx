@@ -48,7 +48,6 @@ export function LoginForm() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        {/* Username Field */}
         <div className="mb-5">
           <label className="block text-[14px] font-semibold text-[#1A202C] mb-2">
             Username*
@@ -62,7 +61,6 @@ export function LoginForm() {
           />
         </div>
 
-        {/* Password Field */}
         <div className="mb-3">
           <label className="block text-[14px] font-semibold text-[#1A202C] mb-2">
             Password*
@@ -94,7 +92,6 @@ export function LoginForm() {
           </div>
         </div>
 
-        {/* Error Message */}
         {error && (
           <div className="flex items-center gap-2 mb-4 p-3 text-[13px] text-red-600 bg-red-50 border border-red-200 rounded-lg">
             <Image
@@ -108,7 +105,6 @@ export function LoginForm() {
           </div>
         )}
 
-        {/* Remember Me */}
         <div className="flex items-center mb-7">
           <Checkbox id="remember" />
           <label
@@ -119,7 +115,6 @@ export function LoginForm() {
           </label>
         </div>
 
-        {/* Login Button */}
         <Button type="submit" fullWidth disabled={isLoading}>
           {isLoading ? "Logging in..." : "Login"}
         </Button>

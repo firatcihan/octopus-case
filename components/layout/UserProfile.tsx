@@ -75,7 +75,7 @@ export function UserProfile() {
         <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-semibold text-sm">
           {letters}
         </div>
-        <span className="text-base leading-[26px] font-normal text-gray-700">
+        <span className="text-base leading-6.5 font-normal text-gray-700">
           {fullName}
         </span>
         <Image

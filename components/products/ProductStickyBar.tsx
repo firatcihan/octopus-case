@@ -11,7 +11,6 @@ export function ProductStickyBar({ product }: ProductStickyBarProps) {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
       <div className="px-9 h-25 flex items-center justify-between">
-        {/* Left Side - Order Summary */}
         <div className="flex items-center h-full flex-1">
           <div className="h-full flex items-center pr-8">
             <span className="text-[22px] font-bold text-black">
@@ -29,7 +28,6 @@ export function ProductStickyBar({ product }: ProductStickyBarProps) {
           </div>
         </div>
 
-        {/* Right Side - Price & Add to Cart */}
         <div className="flex items-center gap-4 pl-8">
           <span className="text-4xl font-medium text-black">
             ${product.price.toFixed(2)}

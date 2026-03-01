@@ -50,7 +50,6 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Main Image */}
       <div
         className="relative aspect-square w-full bg-[#f8fafc] rounded-lg overflow-hidden flex items-center justify-center p-8 cursor-zoom-in group"
         onMouseEnter={() => setIsHovering(true)}
@@ -81,14 +80,13 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
         )}
       </div>
 
-      {/* Thumbnails */}
       {images.length > 1 && (
         <div className="flex gap-4 overflow-x-auto pb-2">
           {images.map((image, index) => (
             <button
               key={index}
               onClick={() => setSelectedImage(image)}
-              className={`relative w-24 h-24 flex-shrink-0 bg-white overflow-hidden border transition-colors ${
+              className={`relative w-24 h-24 shrink-0 bg-white overflow-hidden border transition-colors ${
                 selectedImage === image
                   ? "border-black"
                   : "border-gray-200 hover:border-gray-300"
@@ -106,13 +104,11 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
         </div>
       )}
 
-      {/* Zoom Modal */}
       {isModalOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 lg:p-10 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-black/95 p-4 lg:p-10 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setIsModalOpen(false)}
         >
-          {/* Close Button */}
           <button
             className="absolute top-6 right-6 text-white w-12 h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors z-50 cursor-pointer border border-white/20"
             onClick={(e) => {
@@ -136,7 +132,6 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
             </svg>
           </button>
 
-          {/* Previous Button */}
           {images.length > 1 && (
             <button
               className="absolute left-4 lg:left-10 text-white w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-all z-50 cursor-pointer border border-white/20 hover:scale-110"
@@ -177,15 +172,13 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
                 quality={100}
               />
             </div>
-            {/* Image Counter */}
             {images.length > 1 && (
-              <div className="absolute bottom-[-2rem] text-white/50 text-sm font-medium bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-sm">
+              <div className="absolute -bottom-8 text-white/50 text-sm font-medium bg-black/50 px-4 py-1.5 rounded-full backdrop-blur-sm">
                 {selectedIndex + 1} / {images.length}
               </div>
             )}
           </div>
 
-          {/* Next Button */}
           {images.length > 1 && (
             <button
               className="absolute right-4 lg:right-10 text-white w-14 h-14 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-all z-50 cursor-pointer border border-white/20 hover:scale-110"

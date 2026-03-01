@@ -200,7 +200,6 @@ export function CartBadge() {
             </ul>
           )}
 
-          {/* Footer */}
           <CartSummary
             totalPrice={totalPrice}
             disabled={items.length === 0}

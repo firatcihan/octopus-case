@@ -19,12 +19,12 @@ export function Sidebar() {
 
   const [localSearch, setLocalSearch] = useState(currentSearch);
 
-  // URL'den gelen arama değeri değiştiğinde local state'i güncelle
+  // URLden gelen arama değeri değiştiğinde local state'i güncelle
   useEffect(() => {
     setLocalSearch(currentSearch);
   }, [currentSearch]);
 
-  // Debounced search — URL'ye push
+  // Debounced search — URLye push
   useEffect(() => {
     const timer = setTimeout(() => {
       if (localSearch !== currentSearch) {

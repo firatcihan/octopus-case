@@ -16,9 +16,7 @@ export const metadata: Metadata = {
 export default function Login() {
   return (
     <div className="flex min-h-screen bg-white font-sans">
-      {/* Left Column */}
       <div className="flex flex-col bg-[#F8F9FA] py-12 relative justify-between flex-825">
-        {/* Logo */}
         <div className="px-12">
           <Image
             src="/assets/logos/logo.png"
@@ -29,10 +27,8 @@ export default function Login() {
             priority
           />
         </div>
-        {/* px ile oynayarak düzeltme yapabilirsin */}
-        <div className="grow flex flex-col justify-center px-[165px]">
-          {/* Illustration */}
-          <div className="flex justify-center mb-[64px]">
+        <div className="grow flex flex-col justify-center px-41.25">
+          <div className="flex justify-center mb-16">
             <Image
               src="/assets/images/login-image.png"
               alt="Content Creator Illustration"
@@ -43,7 +39,6 @@ export default function Login() {
             />
           </div>
 
-          {/* Text Content */}
           <div>
             <h1 className="text-[32px] font-bold text-[#1E293B] leading-tight mb-4">
               Let Free Your Creativity with Our Intuitive Content Creator
@@ -58,7 +53,6 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right Column */}
       <div className="flex-615 flex items-center justify-center p-8">
         <Suspense>
           <LoginForm />
