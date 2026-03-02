@@ -1,6 +1,6 @@
 # Octopus Case — Mini E-Commerce
 
-**Canli Site:** [https://octopus-case-7yolqls2y-firatcihans-projects.vercel.app/](https://octopus-case-7yolqls2y-firatcihans-projects.vercel.app/)
+**Canli Site:** [https://octopus-case-4b2bdpkub-firatcihans-projects.vercel.app/](https://octopus-case-4b2bdpkub-firatcihans-projects.vercel.app/)
 
 > [English version below](#english)
 
